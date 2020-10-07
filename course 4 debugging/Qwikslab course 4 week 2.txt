@@ -1,0 +1,101 @@
+student-02-a5211d74e346@linux-instance:~$ sudo apt install python3-pip
+>>> import psutil
+>>> psutil.cpu_percent()
+0.0
+>>> psutil.cpu_percent()
+0.0
+>>> psutil.cpu_percent()
+0.2
+>>> psutil.disk_io_counters()
+sdiskio(read_count=6461, write_count=27524, read_bytes=210109440, write_bytes=1460428800, read_time=20208, write_time=4676508, read_merged_count=1, write_merged_count=28089, busy_time=18812)
+>>> psutil.net_io_counters()
+snetio(bytes_sent=1593200, bytes_recv=166000648, packets_sent=15970, packets_recv=17745, errin=0, errout=0, dropin=0, dropout=0)
+>>> exit()
+student-02-a5211d74e346@linux-instance:~$ python3
+Python 3.5.3 (default, Sep 27 2018, 17:25:39)
+[GCC 6.3.0 20170516] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import subprocess
+>>> exit()
+student-02-a5211d74e346@linux-instance:~$ ls ~/scripts
+dailysync.py  multisync.py
+student-02-a5211d74e346@linux-instance:~$ cat multisync.py
+cat: multisync.py: No such file or directory
+student-02-a5211d74e346@linux-instance:~$ cd ~/scripts
+student-02-a5211d74e346@linux-instance:~/scripts$ cd ~/scripts
+student-02-a5211d74e346@linux-instance:~/scripts$ cat multisync.py
+#!/usr/bin/env python3
+from multiprocessing import Pool
+def run(task):
+  # Do something with task here
+    print("Handling {}".format(task))
+if __name__ == "__main__":
+  tasks = ['task1', 'task2', 'task3']
+  # Create a pool of specific number of CPUs
+  p = Pool(len(tasks))
+  # Start each task within the pool
+  p.map(run, tasks)
+student-02-a5211d74e346@linux-instance:~/scripts$ nano multisync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ sudo chmod +x ~/scripts/multisync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ ./multisync.py
+Handling task1
+Handling task2
+Handling task3
+student-02-a5211d74e346@linux-instance:~/scripts$ nano dailysync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ nano multisync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ nano dailysync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ nano multisync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ nano dailysync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ nano dailysync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ nano multisync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ nano dailysync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ sudo apt-get install rsync
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+rsync is already the newest version (3.1.2-1+deb9u2).
+0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+student-02-a5211d74e346@linux-instance:~/scripts$ nano dailysync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ sudo chmod +x ~/scripts/dailysync.py
+student-02-a5211d74e346@linux-instance:~/scripts$
+student-02-a5211d74e346@linux-instance:~/scripts$ nano dailysync.py
+student-02-a5211d74e346@linux-instance:~/scripts$ ./dailysync.py
+('7', ' directories found')
+Handling beta
+Handling sigma
+Handling gamma
+Handling delta
+Handling omega
+Handling kappa
+Handling alpha
+
+#### example ####
+
+#!/usr/bin/env python
+import subprocess
+from multiprocessing import Pool
+import os
+
+home_path = os.path.expanduser('~')
+
+src = home_path + "/data/prod/"
+dest = home_path + "/data/prod_backup/"
+
+
+def main(directory):
+  print("Handling {}".format(directory))
+  subprocess.call(["rsync", "-arq", src + directory, dest])
+
+if __name__ == "__main__":
+
+    directories = []
+    for root, dirs, files in os.walk(src):
+      for d in dirs:
+         #print(d)
+         directories.append(d)
+      break
+    len_d = len(directories)
+    print(str(len_d) + ' directories  found')
+
+    p = Pool(len_d)
+    p.map(main, directories)

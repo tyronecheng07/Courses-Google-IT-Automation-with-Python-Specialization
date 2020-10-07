@@ -1,0 +1,399 @@
+student-00-293bf24a5f39@linux-instance:~$ ls
+start_date_report.py
+student-00-293bf24a5f39@linux-instance:~$ sudo chmod 777 ~/start_data_report.py
+chmod: cannot access '/home/student-00-293bf24a5f39/start_data_report.py': No such file or directory
+student-00-293bf24a5f39@linux-instance:~$ sudo chmod 777 ~/start_date_report.py
+student-00-293bf24a5f39@linux-instance:~$ ./start_date_report.py
+
+Getting the first start date to query for.
+
+The date must be greater than Jan 1st, 2018
+Enter a value for the year: 2020
+Enter a value for the month: 4
+Enter a value for the day: 29
+
+Traceback (most recent call last):
+  File "./start_date_report.py", line 81, in <module>
+    main()
+  File "./start_date_report.py", line 77, in main
+    start_date = get_start_date()
+  File "./start_date_report.py", line 20, in get_start_date
+    return datetime.datetime(year, month, day)
+TypeError: an integer is required (got type str)
+student-00-293bf24a5f39@linux-instance:~$ nano start_date_report.py
+student-00-293bf24a5f39@linux-instance:~$ ./start_date_report.py
+
+Getting the first start date to query for.
+
+The date must be greater than Jan 1st, 2018
+Enter a value for the year: 2020
+Enter a value for the month: 4
+Enter a value for the day: 29
+
+Started on Apr 29, 2020: ['Jennifer Murphy']
+student-00-293bf24a5f39@linux-instance:~$ time ./start_date_report.py
+
+Getting the first start date to query for.
+
+The date must be greater than Jan 1st, 2018
+Enter a value for the year: 2020
+Enter a value for the month: 4
+Enter a value for the day: 29
+
+Started on Apr 29, 2020: ['Jennifer Murphy']
+
+real    0m13.598s
+user    0m0.132s
+sys     0m0.004s
+student-00-293bf24a5f39@linux-instance:~$ time ./test.py
+-bash: ./test.py: No such file or directory
+
+real    0m0.003s
+user    0m0.000s
+sys     0m0.000s
+
+student-00-293bf24a5f39@linux-instance:~$ nano start_date_report.py
+student-00-293bf24a5f39@linux-instance:~$ nano start_date_report.py
+student-00-293bf24a5f39@linux-instance:~$ ./start_date_report.py
+
+Getting the first start date to query for.
+
+The date must be greater than Jan 1st, 2018
+Enter a value for the year: 2019
+Enter a value for the month: 01
+Enter a value for the day: 01
+
+Started on 2018-01-01: Aurelia Giles
+Started on 2019-01-05: Lucy Calhoun
+Started on 2019-01-11: Macon Livingston
+Started on 2019-01-12: Curran Farley
+Started on 2019-01-13: Lucius Glass
+Started on 2019-01-14: Michael Pickett
+Started on 2019-01-15: Andrew Donaldson
+Started on 2019-01-19: Richard Dillon
+Started on 2019-01-21: Clare Saunders
+Started on 2019-01-21: Ainsley Knight
+Started on 2019-01-26: Fleur Baker
+Started on 2019-01-26: Casey Gross
+Started on 2019-01-29: Felix Parks
+Started on 2019-02-03: Logan Sharp
+Started on 2019-02-04: Eve Meyer
+Started on 2019-02-05: Neil Warner
+Started on 2019-02-11: Kylan Spencer
+Started on 2019-02-12: Adara Mclaughlin
+Started on 2019-02-14: Diana Mccall
+Started on 2019-02-15: Knox Williamson
+Started on 2019-02-17: Nathaniel Puckett
+Started on 2019-02-18: Keane Greer
+Started on 2019-02-20: May Oliver
+Started on 2019-02-21: Dana Harrington
+Started on 2019-02-23: Gavin Garrett
+Started on 2019-02-25: Lucy Wade
+Started on 2019-02-27: Malachi Mccullough
+Started on 2019-02-28: Phyllis Miller
+Started on 2019-03-03: Martin Dalton
+Started on 2019-03-04: Gage Vega
+Started on 2019-03-05: Benjamin Blake
+Started on 2019-03-06: Xerxes James
+Started on 2019-03-11: Anne Giles
+Started on 2019-03-15: Fay Schroeder
+Started on 2019-03-17: Keaton Edwards
+Started on 2019-03-18: Sheila Richards
+Started on 2019-03-22: Jelani Fernandez
+Started on 2019-03-27: Walker Cline
+Started on 2019-03-29: Eleanor Dorsey
+Started on 2019-03-30: Kelly Dillon
+Started on 2019-03-30: Denise Wilkins
+Started on 2019-04-05: Lucas Fuentes
+Started on 2019-04-07: Taylor Butler
+Started on 2019-04-09: Raven Benton
+Started on 2019-04-10: Dana Miles
+Started on 2019-04-13: Hayden Pollard
+Started on 2019-04-15: Rogan Miranda
+Started on 2019-04-18: Jessamine Myers
+Started on 2019-04-24: Scott Nelson
+Started on 2019-04-26: Kylan Mccormick
+Started on 2019-04-30: Darryl Levy
+Started on 2019-05-01: Chancellor Kline
+Started on 2019-05-01: Stewart Todd
+Started on 2019-05-02: Jenna Odom
+Started on 2019-05-04: Devin Foley
+Started on 2019-05-06: Rudyard Williamson
+Started on 2019-05-06: Paul Spears
+Started on 2019-05-06: Vaughan English
+Started on 2019-05-07: Ryder Adams
+Started on 2019-05-10: Chase Chandler
+Started on 2019-05-14: Lionel Wells
+Started on 2019-05-20: Nathan Mays
+Started on 2019-05-23: Nell Ewing
+Started on 2019-05-23: Lydia Mills
+Started on 2019-05-24: Honorato Solomon
+Started on 2019-05-26: Audra Cobb
+Started on 2019-05-26: Neville Ball
+Started on 2019-05-28: Otto Bird
+Started on 2019-05-28: Venus Love
+Started on 2019-05-29: David Lamb
+Started on 2019-06-01: Allistair Mcdaniel
+Started on 2019-06-02: Belle Lane
+Started on 2019-06-02: Wyoming Pacheco
+Started on 2019-06-03: Audra Horn
+Started on 2019-06-06: Kennedy Harrington
+Started on 2019-06-08: Adrienne Higgins
+Started on 2019-06-08: Miranda Vasquez
+Started on 2019-06-19: Keane Randall
+Started on 2019-06-27: Hu Simpson
+Started on 2019-07-01: Eric Giles
+Started on 2019-07-04: Harding Mcmillan
+Started on 2019-07-05: Linus Perry
+Started on 2019-07-08: Fritz Tanner
+Started on 2019-07-08: Haviva Morrow
+Started on 2019-07-09: Hayden Puckett
+Started on 2019-07-09: Desirae Cash
+Started on 2019-07-09: Eleanor Hood
+Started on 2019-07-14: Thaddeus Hughes
+Started on 2019-07-19: Darrel Mccray
+Started on 2019-07-20: Baxter Combs
+Started on 2019-07-22: Brenda Barton
+Started on 2019-07-26: Morgan Massey
+Started on 2019-07-30: Wesley Weaver
+Started on 2019-07-30: Teagan Dodson
+Started on 2019-08-01: Hoyt Kramer
+Started on 2019-08-02: Madonna Perkins
+Started on 2019-08-04: Orlando Stanley
+Started on 2019-08-05: Xaviera Carlson
+Started on 2019-08-06: Xaviera Spence
+Started on 2019-08-06: Serena Hodge
+Started on 2019-08-13: Constance Rocha
+Started on 2019-08-15: Isabelle Jefferson
+Started on 2019-08-19: Linda Figueroa
+Started on 2019-08-19: Rosalyn Bullock
+Started on 2019-08-20: Carson Finley
+Started on 2019-08-23: Malcolm Harvey
+Started on 2019-08-23: Aladdin Knight
+Started on 2019-08-24: Zeus Kirk
+Started on 2019-08-24: Amelia Bowen
+Started on 2019-08-24: Ella Sloan
+Started on 2019-08-25: Brendan Pugh
+Started on 2019-08-28: Alexander Dillard
+Started on 2019-08-31: Quintessa Ramsey
+Started on 2019-09-01: Georgia Larson
+Started on 2019-09-02: Adrienne Dalton
+Started on 2019-09-06: Cherokee Dillard
+Started on 2019-09-06: Fatima Robinson
+Started on 2019-09-08: Ruby Travis
+Started on 2019-09-11: Maile Hughes
+Started on 2019-09-13: Benedict Mathis
+Started on 2019-09-17: Eric Blackburn
+Started on 2019-09-19: Nigel Oneill
+Started on 2019-09-19: Elvis Davidson
+Started on 2019-09-26: Jason Meyer
+Started on 2019-09-28: Roanna Barry
+Started on 2019-09-29: Justina Hogan
+Started on 2019-10-01: Aurelia Campbell
+Started on 2019-10-01: Anjolie Powell
+Started on 2019-10-02: Marsden Oneill
+Started on 2019-10-03: Candice Malone
+Started on 2019-10-04: Quamar Stewart
+Started on 2019-10-06: Darius Goodman
+Started on 2019-10-15: Idola Warren
+Started on 2019-10-16: Hu Hyde
+Started on 2019-10-16: Lesley Fuentes
+Started on 2019-10-17: Justin Dalton
+Started on 2019-10-18: Mary Molina
+Started on 2019-10-22: Carol Weiss
+Started on 2019-10-31: Evangeline Cooley
+Started on 2019-10-31: Hayes Whitley
+Started on 2019-11-07: Ciaran Chavez
+Started on 2019-11-11: Britanni Burgess
+Started on 2019-11-16: Fatima Kerr
+Started on 2019-11-19: Yetta Thomas
+Started on 2019-11-20: Slade Roman
+Started on 2019-11-22: Macy Walls
+Started on 2019-11-24: Cally Gilmore
+Started on 2019-11-26: MacKenzie Murphy
+Started on 2019-11-27: Kiara Farrell
+Started on 2019-12-01: Lilah Hanson
+Started on 2019-12-04: Micah Bentley
+Started on 2019-12-09: Cade Grant
+Started on 2019-12-11: Megan Reed
+Started on 2019-12-13: Ulla Fulton
+Started on 2019-12-13: Karyn Roy
+Started on 2019-12-15: Shellie Poole
+Started on 2019-12-15: Emi William
+Started on 2019-12-19: George William
+Started on 2019-12-20: Wynne Anthony
+Started on 2019-12-27: Phelan Fields
+Started on 2019-12-31: Deacon Blevins
+Started on 2020-01-02: Yoshi Molina
+Started on 2020-01-04: Tasha Hodge
+Started on 2020-01-05: Margaret Hooper
+Started on 2020-01-05: Ruby Richard
+Started on 2020-01-08: Lyle Schultz
+Started on 2020-01-09: Roth Foster
+Started on 2020-01-13: Tanek Burton
+Started on 2020-01-13: Kyla Gay
+Started on 2020-01-13: Leigh Willis
+Started on 2020-01-14: Brynn Miles
+Started on 2020-01-14: Lane Newman
+Started on 2020-01-16: Rose Compton
+Started on 2020-01-19: Connor Grimes
+Started on 2020-01-20: Hedwig Cain
+Started on 2020-01-23: Hillary Vega
+Started on 2020-01-24: Olivia Frederick
+Started on 2020-01-24: Xandra Gonzalez
+Started on 2020-01-25: Jesse Wade
+Started on 2020-01-26: Thane Rich
+Started on 2020-01-28: Keefe Logan
+Started on 2020-02-05: Colin Maddox
+Started on 2020-02-06: Ivan Dillard
+Started on 2020-02-09: Desirae Gaines
+Started on 2020-02-11: Ivory Mccullough
+Started on 2020-02-15: Iona Mckee
+Started on 2020-02-17: Lee Jacobs
+Started on 2020-02-26: Giacomo Duffy
+Started on 2020-02-29: Stewart Simmons
+Started on 2020-03-04: Janna Green
+Started on 2020-03-05: Tobias Mcleod
+Started on 2020-03-07: Laith Moreno
+Started on 2020-03-09: Kane Rosa
+Started on 2020-03-09: Mannix Estes
+Started on 2020-03-09: Josiah Morrow
+Started on 2020-03-09: Rhiannon Dodson
+Started on 2020-03-10: TaShya Pruitt
+Started on 2020-03-10: Zeph English
+Started on 2020-03-12: Gretchen Holden
+Started on 2020-03-12: Drake English
+Started on 2020-03-13: Aidan Schroeder
+Started on 2020-03-13: Amaya Mercado
+Started on 2020-03-15: Amela Grant
+Started on 2020-03-24: Fiona Montoya
+Started on 2020-03-24: Kay Pratt
+Started on 2020-03-27: Tate Chang
+Started on 2020-04-04: Linus Cantrell
+Started on 2020-04-13: Garrison Keith
+Started on 2020-04-14: Giselle Chavez
+Started on 2020-04-18: Jermaine Newman
+Started on 2020-04-22: Halla Cantu
+Started on 2020-04-22: Vera Carver
+Started on 2020-04-23: Kaden Moon
+Started on 2020-04-24: Giselle Dillon
+Started on 2020-04-26: Bradley Chandler
+Started on 2020-04-29: Jennifer Murphy
+Started on 2020-05-03: Jack Franco
+Started on 2020-05-07: Oleg Noble
+Started on 2020-05-10: Lavinia Whitfield
+Started on 2020-05-13: Kalia Perez
+Started on 2020-05-13: Rafael Vaughan
+Started on 2020-05-16: Raymond Pate
+Started on 2020-05-17: Bruno Wallace
+Started on 2020-05-19: Aurora Macias
+Started on 2020-05-22: Gemma Booker
+Started on 2020-05-28: Blake Franco
+Started on 2020-06-02: Kyle Roach
+Started on 2020-06-04: Tanek Edwards
+Started on 2020-06-06: Liberty Pena
+Started on 2020-06-10: Kyra Vance
+Started on 2020-06-11: Kiona Nguyen
+Started on 2020-06-13: Aurora Sanford
+Started on 2020-06-20: Jarrod Nicholson
+Started on 2020-06-24: Nicholas Brock
+Started on 2020-06-25: Quynn Parsons
+Started on 2020-06-25: Katell Gill
+Started on 2020-06-27: Melanie David
+Started on 2020-06-27: Jordan Golden
+Started on 2020-06-28: Xyla Ferrell
+Started on 2020-06-29: Kelsey Adkins
+Started on 2020-06-30: Grant Daugherty
+
+
+
+
+
+### example #####
+#!/usr/bin/env python3
+import csv
+import datetime
+import requests
+
+FILE_URL="http://marga.com.ar/employees-with-date.csv"
+
+def get_start_date():
+    """Interactively get the start date to query for."""
+
+    print()
+    print('Getting the first start date to query for.')
+    print()
+    print('The date must be greater than Jan 1st, 2018')
+    year = int(input('Enter a value for the year: '))
+    month = int(input('Enter a value for the month: '))
+    day = int(input('Enter a value for the day: '))
+    print()
+
+    return datetime.datetime(year, month, day)
+
+def get_file_lines(url):
+    """Returns the lines contained in the file at the given URL"""
+
+    # Download the file over the internet
+    response = requests.get(url, stream=True)
+
+    # Decode all lines into strings
+    lines = []
+    for line in response.iter_lines():
+        lines.append(line.decode("UTF-8"))
+    return lines
+
+def get_same_or_newer(start_date):
+    """Returns the employees that started on the given date, or the closest one."""
+    data = get_file_lines(FILE_URL)
+    reader = csv.reader(data[1:])
+    lst = list(reader)
+    lst.sort(key=lambda x:x[3])
+
+    # We want all employees that started at the same date or the closest newer
+    # date. To calculate that, we go through all the data and find the
+    # employees that started on the smallest date that's equal or bigger than
+    # the given start date.
+    min_date = datetime.datetime.today()
+    min_date_employees = []
+    row_dlist = []
+    for row in lst:
+        row_date = datetime.datetime.strptime(row[3], '%Y-%m-%d')
+
+        # If this date is smaller than the one we're looking for,
+        # we skip this row
+        if row_date >= start_date:
+            row_dlist.append(row[3])
+            min_date_employees.append("{} {}".format(row[0], row[1]))
+
+
+        # If this date is smaller than the current minimum,
+        # we pick it as the new minimum, resetting the list of
+        # employees at the minimal date.
+        if row_date < min_date:
+            min_date = row_date
+            min_date_employees = []
+
+        # If this date is the same as the current minimum,
+        # we add the employee in this row to the list of
+        # employees at the minimal date.
+        if row_date == min_date:
+            row_dlist.append(row[3])
+            min_date_employees.append("{} {}".format(row[0], row[1]))
+
+    return row_dlist, min_date_employees
+
+def list_newer(start_date):
+    s_date, employees = get_same_or_newer(start_date)
+    for i in range(0, len(s_date)):
+        print("Started on {}: {}".format(s_date[i], employees[i]))
+
+        # Now move the date to the next one
+        start_date = start_date + datetime.timedelta(days=1)
+
+def main():
+    start_date = get_start_date()
+    list_newer(start_date)
+
+if __name__ == "__main__":
+    main()
