@@ -1,0 +1,109 @@
+
+student-03-f4e95cdc7bbf@linux-instance:~$ sudo apt update
+student-03-f4e95cdc7bbf@linux-instance:~$ sudo apt install git
+student-03-f4e95cdc7bbf@linux-instance:~$ git --version
+git version 2.11.0
+student-03-f4e95cdc7bbf@linux-instance:~$ mkdir my-git-repo
+student-03-f4e95cdc7bbf@linux-instance:~$ cd my-git-repo
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git init
+Initialized empty Git repository in /home/student-03-f4e95cdc7bbf/my-git-repo/.git/
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git config --global user.name "Name"
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git config --global user.name "dilloncky@gmail.com"
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ nano README
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git status
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        README
+
+nothing added to commit but untracked files present (use "git add" to track)
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git add README
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+        new file:   README
+
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git commit
+[master (root-commit) 9b01d74] This is my first commit!
+ Committer: dilloncky@gmail.com <student-03-f4e95cdc7bbf@linux-instance.c.qwiklabs-gcp-03-e725ad0eb771.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+)
+ create mode 100644 README
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ nano README
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   README
+
+no changes added to commit (use "git add" and/or "git commit -a")
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git diff README
+diff --git a/README b/README
+index a2848da..50b5177 100644
+--- a/README
++++ b/README
+@@ -1,2 +1,4 @@
+ This is my first repository
+
++A repository is a location where all the files of a particular project are stored.
++
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git add README
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   README
+
+
+> student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git commit -m "This is my second commit"
+> ^C
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ ^C
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git commit -m "This is my second commit"
+[master fe408eb] This is my second commit
+ Committer: dilloncky@gmail.com <student-03-f4e95cdc7bbf@linux-instance.c.qwiklabs-gcp-03-e725ad0eb771.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+)
+student-03-f4e95cdc7bbf@linux-instance:~/my-git-repo$ git log
+commit fe408ebcb4e59e2de93888e1aabfe350e61331ac
+Author: dilloncky@gmail.com <student-03-f4e95cdc7bbf@linux-instance.c.qwiklabs-gcp-03-e725ad0eb771.internal>
+Date:   Mon Apr 27 20:23:14 2020 +0000
+
+    This is my second commit
+
+commit 9b01d748ac25907debf00cf192eddf58e94f5fe9
+Author: dilloncky@gmail.com <student-03-f4e95cdc7bbf@linux-instance.c.qwiklabs-gcp-03-e725ad0eb771.internal>
+Date:   Mon Apr 27 20:15:39 2020 +0000
+
+    This is my first commit!

@@ -1,0 +1,106 @@
+student-00-2de0e25e2130@linux-instance:~$ git clone https://github.com/[git-username]/it-cert-automation-practice.git
+Cloning into 'it-cert-automation-practice'...
+student-00-2de0e25e2130@linux-instance:~$ git clone https://github.com/tyronecheng07/it-cert-automation-practice.git
+Cloning into 'it-cert-automation-practice'...
+remote: Enumerating objects: 20, done.
+remote: Total 20 (delta 0), reused 0 (delta 0), pack-reused 20
+Unpacking objects: 100% (20/20), done.
+student-00-2de0e25e2130@linux-instance:~$ cd ~/it-cert-automation-practice
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice$ git remote -v
+origin  https://github.com/tyronecheng07/it-cert-automation-practice.git (fetch)
+origin  https://github.com/tyronecheng07/it-cert-automation-practice.git (push)
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice$ git remote add upstream https://github.com/tyronecheng07/it-cert-automation-practise.git
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice$ git remote -v
+origin  https://github.com/tyronecheng07/it-cert-automation-practice.git (fetch)
+origin  https://github.com/tyronecheng07/it-cert-automation-practice.git (push)
+upstream        https://github.com/tyronecheng07/it-cert-automation-practise.git (fetch)
+upstream        https://github.com/tyronecheng07/it-cert-automation-practise.git (push)
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice$ git config --global user.name "ky"
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice$ git config --global user.email "dilloncky@gmail.com"
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice$ git branch improve-username-behavior
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice$ git checkout improve-username-behavior
+Switched to branch 'improve-username-behavior'
+
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice$ cd ~/it-cert-automation-practice/Course3/Lab4
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ ls
+validations.py
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ cat vadilations.py
+cat: vadilations.py: No such file or directory
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ cat validations.py
+#!/usr/bin/env python3
+
+import re
+
+def validate_user(username, minlen):
+    """Checks if the received username matches the required conditions."""
+    if type(username) != str:
+        raise TypeError("username must be a string")
+    if minlen < 1:
+        raise ValueError("minlen must be at least 1")
+
+    # Usernames can't be shorter than minlen
+    if len(username) < minlen:
+        return False
+    # Usernames can only use letters, numbers, dots and underscores
+    if not re.match('^[a-z0-9._]*$', username):
+        return False
+    # Usernames can't begin with a number
+    if username[0].isnumeric():
+        return False
+    return True
+
+
+
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ nano validations.py
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ python3 validations.py
+True
+True
+True
+True
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ nano validations.py
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ python3 validations.py
+True
+False
+True
+False
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ git status
+On branch improve-username-behavior
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   validations.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ git add validations.py
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ git status
+On branch improve-username-behavior
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   validations.py
+
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ git commit
+
+[improve-username-behavior af0ed51] 
+
+*************Closes: #1 Updatad validations.py python script. Fixed the behavior of validate_user function in validations.py***********
+
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$ git push origin improve-username-behavior
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+Counting objects: 5, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 617 bytes | 0 bytes/s, done.
+Total 5 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote:
+remote: Create a pull request for 'improve-username-behavior' on GitHub by visiting:
+remote:      https://github.com/tyronecheng07/it-cert-automation-practice/pull/new/improve-username-behavior
+remote:
+To https://github.com/tyronecheng07/it-cert-automation-practice.git
+ * [new branch]      improve-username-behavior -> improve-username-behavior
+
+student-00-2de0e25e2130@linux-instance:~/it-cert-automation-practice/Course3/Lab4$

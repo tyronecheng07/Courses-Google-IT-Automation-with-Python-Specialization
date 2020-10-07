@@ -1,0 +1,195 @@
+
+student-00-99eb5d52cae0@linux-instance:~$ git clone https://github.com/tyronecheng07/course3.git
+Cloning into 'course3'...
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+student-00-99eb5d52cae0@linux-instance:~$ ls
+course3
+student-00-99eb5d52cae0@linux-instance:~$ cd course3
+student-00-99eb5d52cae0@linux-instance:~/course3$ git config --global user.name "ky"
+student-00-99eb5d52cae0@linux-instance:~/course3$ git config --global user.email "dilloncky@gmail.com"
+student-00-99eb5d52cae0@linux-instance:~/course3$ nano README.md
+student-00-99eb5d52cae0@linux-instance:~/course3$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+student-00-99eb5d52cae0@linux-instance:~/course3$ git add README.md
+student-00-99eb5d52cae0@linux-instance:~/course3$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   README.md
+
+student-00-99eb5d52cae0@linux-instance:~/course3$ git commit
+[master 0dc00e3] I am editing the README file
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+
+fatal: Authentication failed for 'https://github.com/tyronecheng07/course3.git/'
+student-00-99eb5d52cae0@linux-instance:~/course3$ git  push origin master
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+Counting objects: 3, done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 341 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/tyronecheng07/course3.git
+   4487d37..0dc00e3  master -> master
+student-00-99eb5d52cae0@linux-instance:~/course3$ nano example.py
+student-00-99eb5d52cae0@linux-instance:~/course3$ git add example.py
+student-00-99eb5d52cae0@linux-instance:~/course3$ git commit
+[master 7b4a555] I am adding example.py file
+ 1 file changed, 5 insertions(+)
+ create mode 100644 example.py
+
+student-00-99eb5d52cae0@linux-instance:~/course3$ git push origin master
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+To https://github.com/tyronecheng07/course3.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/tyronecheng07/course3.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+student-00-99eb5d52cae0@linux-instance:~/course3$ git pull origin master
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/tyronecheng07/course3
+ * branch            master     -> FETCH_HEAD
+   0dc00e3..4fb4446  master     -> origin/master
+Merge made by the 'recursive' strategy.
+ example | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 example
+
+student-00-99eb5d52cae0@linux-instance:~/course3$ git push origin master
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+Counting objects: 5, done.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 631 bytes | 0 bytes/s, done.
+Total 5 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/tyronecheng07/course3.git
+   4fb4446..8feafac  master -> master
+student-00-99eb5d52cae0@linux-instance:~/course3$
+
+student-00-99eb5d52cae0@linux-instance:~$ git clone https://github.com/tyroneche             ng07/course3.git
+Cloning into 'course3'...
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+student-00-99eb5d52cae0@linux-instance:~$ ls
+course3
+student-00-99eb5d52cae0@linux-instance:~$ cd course3
+student-00-99eb5d52cae0@linux-instance:~/course3$ git config --global user.name              "ky"
+student-00-99eb5d52cae0@linux-instance:~/course3$ git config --global user.email              "dilloncky@gmail.com"
+student-00-99eb5d52cae0@linux-instance:~/course3$ nano README.md
+student-00-99eb5d52cae0@linux-instance:~/course3$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+student-00-99eb5d52cae0@linux-instance:~/course3$ git add README.md
+student-00-99eb5d52cae0@linux-instance:~/course3$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   README.md
+
+student-00-99eb5d52cae0@linux-instance:~/course3$ git commit
+[master 0dc00e3] I am editing the README file
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+student-00-99eb5d52cae0@linux-instance:~/course3$ gih  push origin master
+-bash: gih: command not found
+
+student-00-99eb5d52cae0@linux-instance:~/course3$ git  push origin master
+Username for 'https://github.com': git status
+Password for 'https://git status@github.com':
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/tyronecheng07/course3.git/'
+student-00-99eb5d52cae0@linux-instance:~/course3$ git  push origin master
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+Counting objects: 3, done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 341 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/tyronecheng07/course3.git
+   4487d37..0dc00e3  master -> master
+
+student-00-99eb5d52cae0@linux-instance:~/course3$ nano example.py
+student-00-99eb5d52cae0@linux-instance:~/course3$ git add example.py
+student-00-99eb5d52cae0@linux-instance:~/course3$ git commit
+[master 7b4a555] I am adding example.py file
+ 1 file changed, 5 insertions(+)
+ create mode 100644 example.py
+student-00-99eb5d52cae0@linux-instance:~/course3$ git push origin master
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+To https://github.com/tyronecheng07/course3.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/tyronecheng07/course3.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+student-00-99eb5d52cae0@linux-instance:~/course3$ git pull origin master
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/tyronecheng07/course3
+ * branch            master     -> FETCH_HEAD
+   0dc00e3..4fb4446  master     -> origin/master
+Merge made by the 'recursive' strategy.
+ example | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 example
+
+student-00-99eb5d52cae0@linux-instance:~/course3$ git push origin master
+Username for 'https://github.com': tyronecheng07
+Password for 'https://tyronecheng07@github.com':
+Counting objects: 5, done.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 631 bytes | 0 bytes/s, done.
+Total 5 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/tyronecheng07/course3.git
+   4fb4446..8feafac  master -> master
+student-00-99eb5d52cae0@linux-instance:~/course3$
