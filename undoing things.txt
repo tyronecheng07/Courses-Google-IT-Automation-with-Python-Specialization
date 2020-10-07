@@ -1,0 +1,13 @@
+#amending commits
+###after commit, use this command if we want to change the description
+
+cd scripts/
+touch auto-update.py
+touch gather-information.sh
+ls-l
+
+git add auto-update.py
+git commit -m 'Add two new scripts'
+git add gather-information.sh
+git commit --amend
+#let us replace current description

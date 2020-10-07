@@ -1,0 +1,56 @@
+##creating new branches
+
+cd checks
+git branch
+
+git branch new-feature
+git branch
+
+git checkout new-feature
+git branch
+
+git checkout -b even-better-feature
+git atom free_memory.py
+git add free_memory.py
+git commit -m 'Add an empty free_memory.py'
+git log -2
+
+##working with branches
+
+cd checks
+git status
+ls -l
+
+git checkout master
+#to switch to master
+
+git branch
+git branch -d new-feature
+
+##merging
+
+git branch
+git merge even-better-feature
+
+
+##merge conflicts
+
+git commit -a -m 'Add comment to main()'
+#save this at master branch
+
+git checkout even-better-feature
+#now switch to new branch
+
+git commit -a -m 'Print everything ok'
+#now save this file in new branch
+
+git checkout master
+git merge even-better-feature
+#merge new branch into master
+
+return: merge conflict!
+
+solution: open the text editor and fix the problem, either choose one code or combine it altogether
+git add free_memory.py
+git status
+git commit
