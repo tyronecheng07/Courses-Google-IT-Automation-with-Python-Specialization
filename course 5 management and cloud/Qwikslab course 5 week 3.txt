@@ -1,0 +1,128 @@
+######### important notes ###########
+1. after create a new VM-instances
+2. we can create references image, preparation for our automation to create more VM
+3. then we can create templates with our images as boot image
+4. code example: gcloud compute instances create --zone us-west1-b --source-instance-template vm1-template vm2 vm3 vm4 vm5 vm6 vm7 vm8
+5. with this we can create 8 VM, we can create as much as we want, and automate our tasks, using template
+
+
+
+
+########### gcloud command line (shell) ##############
+C:\Users\Tyrone Cheng\AppData\Local\Google\Cloud SDK>gcloud init
+Welcome! This command will take you through the configuration of gcloud.
+
+Settings from your current configuration [default] are:
+core:
+  account: student-04-92950219cddb@qwiklabs.net
+  disable_usage_reporting: 'True'
+  project: qwiklabs-gcp-04-ac4575b5e263
+
+Pick configuration to use:
+ [1] Re-initialize this configuration [default] with new settings
+ [2] Create a new configuration
+Please enter your numeric choice:  1
+
+Your current configuration has been set to: [default]
+
+You can skip diagnostics next time by using the following flag:
+  gcloud init --skip-diagnostics
+
+Network diagnostic detects and fixes local network connection issues.
+Checking network connection...done.
+Reachability Check passed.
+Network diagnostic passed (1/1 checks passed).
+
+You must log in to continue. Would you like to log in (Y/n)?  y
+
+Your browser has been opened to visit:
+
+    https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8085%2F&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=zVmYsqj4vVihji3g4PXbKghpwhKccv&code_challenge=DhHgNEcNSgFighEaBOzZH0rLJsK6hGyRYGp9bXB3y9A&code_challenge_method=S256&access_type=offline
+
+You are logged in as: [student-04-92950219cddb@qwiklabs.net].
+
+Pick cloud project to use:
+ [1] accel-t-inf-hol-2
+ [2] bq-taw-data
+ [3] cloud-solutions-group
+ [4] cloudshell-images
+ [5] dw-workshop
+ [6] hcls-testing-data
+ [7] qwiklabs-gcp-04-ac4575b5e263
+ [8] qwiklabs-resources
+ [9] Create a new project
+Please enter numeric choice or text value (must exactly match list
+item):  7
+
+Your current project has been set to: [qwiklabs-gcp-04-ac4575b5e263].
+
+Your project default Compute Engine zone has been set to [us-central1-a].
+You can change it by running [gcloud config set compute/zone NAME].
+
+Your project default Compute Engine region has been set to [us-central1].
+You can change it by running [gcloud config set compute/region NAME].
+
+Error creating a default .boto configuration file. Please run [gsutil config -n] if you would like to create this file.
+Your Google Cloud SDK is configured and ready to use!
+
+* Commands that require authentication will use student-04-92950219cddb@qwiklabs.net by default
+* Commands will reference project `qwiklabs-gcp-04-ac4575b5e263` by default
+* Compute Engine commands will use region `us-central1` by default
+* Compute Engine commands will use zone `us-central1-a` by default
+
+Run `gcloud help config` to learn how to change individual settings
+
+This gcloud configuration is called [default]. You can create additional configurations if you work with multiple accounts and/or projects.
+Run `gcloud topic configurations` to learn more.
+
+Some things to try next:
+
+* Run `gcloud --help` to see the Cloud Platform services you can interact with. And run `gcloud help COMMAND` to get help on any gcloud command.
+* Run `gcloud topic --help` to learn about advanced features of the SDK like arg files and output formatting
+
+C:\Users\Tyrone Cheng\AppData\Local\Google\Cloud SDK>gcloud compute instances list
+NAME  ZONE        MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP  STATUS
+vm1   us-east1-b  n1-standard-1               10.142.0.2                TERMINATED
+
+C:\Users\Tyrone Cheng\AppData\Local\Google\Cloud SDK>gcloud compute instance create --zone us-west1-b --source-instance-template vm1-template vm2 vm3 vm4 vm5 vm6 vm7 vm8
+ERROR: (gcloud.compute) Invalid choice: 'instance'.
+Maybe you meant:
+  gcloud compute addresses
+  gcloud compute instance-groups
+  gcloud compute instance-templates
+  gcloud compute instances
+  gcloud compute target-instances
+
+To search the help text of gcloud commands, run:
+  gcloud help -- SEARCH_TERMS
+
+C:\Users\Tyrone Cheng\AppData\Local\Google\Cloud SDK>gcloud compute instances create --zone us-west1-b --source-instance-template vm1-template vm2 vm3 vm4 vm5 vm6 vm7 vm8
+Created [https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-ac4575b5e263/zones/us-west1-b/instances/vm2].
+Created [https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-ac4575b5e263/zones/us-west1-b/instances/vm3].
+Created [https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-ac4575b5e263/zones/us-west1-b/instances/vm4].
+Created [https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-ac4575b5e263/zones/us-west1-b/instances/vm5].
+Created [https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-ac4575b5e263/zones/us-west1-b/instances/vm6].
+Created [https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-ac4575b5e263/zones/us-west1-b/instances/vm7].
+Created [https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-ac4575b5e263/zones/us-west1-b/instances/vm8].
+NAME  ZONE        MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
+vm2   us-west1-b  n1-standard-1               10.138.0.3   35.203.168.167  RUNNING
+vm3   us-west1-b  n1-standard-1               10.138.0.5   35.230.86.77    RUNNING
+vm4   us-west1-b  n1-standard-1               10.138.0.7   35.247.84.187   RUNNING
+vm5   us-west1-b  n1-standard-1               10.138.0.6   34.83.60.87     RUNNING
+vm6   us-west1-b  n1-standard-1               10.138.0.8   35.197.10.90    RUNNING
+vm7   us-west1-b  n1-standard-1               10.138.0.4   35.247.36.43    RUNNING
+vm8   us-west1-b  n1-standard-1               10.138.0.2   34.82.237.22    RUNNING
+
+C:\Users\Tyrone Cheng\AppData\Local\Google\Cloud SDK>
+
+
+############ VM-instances ####################
+git clone https://www.github.com/google/it-cert-automation-practice.git
+
+ls
+
+sudo cp hello_cloud.py /usr/local/bin/
+
+sudo cp hello_cloud.service /etc/systemd/system
+
+sudo systemctl enable hello_cloud.service

@@ -1,0 +1,146 @@
+###### stop a file that using port 80, which caused a 500 error http ###########3
+sudo systemctl status apache2
+sudo systemctl restart apache2
+ps -ax | grep [target]
+sudo kill [pid]
+sudo systemctl --type=service | grep [jimmy]
+sudo systemctl stop [jimmytest] && sudo systemctl disable [jimmytest]
+sudo netstat -nlp
+
+#######################3
+student-04-8bb7b802a195@ws01:~$ sudo systemctl status apache2
+● apache2.service - The Apache HTTP Server
+   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+  Drop-In: /lib/systemd/system/apache2.service.d
+           └─apache2-systemd.conf
+   Active: failed (Result: exit-code) since Thu 2020-04-30 12:30:58 UTC; 1min 17s ago
+
+Apr 30 12:30:58 ws01 systemd[1]: Starting The Apache HTTP Server...
+Apr 30 12:30:58 ws01 apachectl[3137]: (98)Address already in use: AH00072: make_sock: could n
+Apr 30 12:30:58 ws01 apachectl[3137]: (98)Address already in use: AH00072: make_sock: could n
+Apr 30 12:30:58 ws01 apachectl[3137]: no listening sockets available, shutting down
+Apr 30 12:30:58 ws01 apachectl[3137]: AH00015: Unable to open logs
+Apr 30 12:30:58 ws01 apachectl[3137]: Action 'start' failed.
+Apr 30 12:30:58 ws01 apachectl[3137]: The Apache error log may have more information.
+Apr 30 12:30:58 ws01 systemd[1]: apache2.service: Control process exited, code=exited status=
+Apr 30 12:30:58 ws01 systemd[1]: apache2.service: Failed with result 'exit-code'.
+Apr 30 12:30:58 ws01 systemd[1]: Failed to start The Apache HTTP Server.
+student-04-8bb7b802a195@ws01:~$ sudo systemctl restart apache2
+Job for apache2.service failed because the control process exited with error code.
+See "systemctl status apache2.service" and "journalctl -xe" for details.
+student-04-8bb7b802a195@ws01:~$ sudo systemctl status apache2
+● apache2.service - The Apache HTTP Server
+   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+  Drop-In: /lib/systemd/system/apache2.service.d
+           └─apache2-systemd.conf
+   Active: failed (Result: exit-code) since Thu 2020-04-30 12:32:49 UTC; 13s ago
+  Process: 3906 ExecStart=/usr/sbin/apachectl start (code=exited, status=1/FAILURE)
+
+Apr 30 12:32:49 ws01 systemd[1]: Starting The Apache HTTP Server...
+Apr 30 12:32:49 ws01 apachectl[3906]: (98)Address already in use: AH00072: make_sock: could n
+Apr 30 12:32:49 ws01 apachectl[3906]: (98)Address already in use: AH00072: make_sock: could n
+Apr 30 12:32:49 ws01 apachectl[3906]: no listening sockets available, shutting down
+Apr 30 12:32:49 ws01 apachectl[3906]: AH00015: Unable to open logs
+Apr 30 12:32:49 ws01 apachectl[3906]: Action 'start' failed.
+Apr 30 12:32:49 ws01 apachectl[3906]: The Apache error log may have more information.
+Apr 30 12:32:49 ws01 systemd[1]: apache2.service: Control process exited, code=exited status=
+Apr 30 12:32:49 ws01 systemd[1]: apache2.service: Failed with result 'exit-code'.
+Apr 30 12:32:49 ws01 systemd[1]: Failed to start The Apache HTTP Server.
+student-04-8bb7b802a195@ws01:~$ sudo netstat -nlp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      2295/python3 
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      712/systemd-resolve
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1318/sshd    
+tcp6       0      0 :::22                   :::*                    LISTEN      1318/sshd    
+udp        0      0 127.0.0.53:53           0.0.0.0:*                           712/systemd-resolve
+udp        0      0 10.128.0.2:68           0.0.0.0:*                           696/systemd-network
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           1983/chronyd 
+udp6       0      0 ::1:323                 :::*                                1983/chronyd 
+raw6       0      0 :::58                   :::*                    7           696/systemd-network
+Active UNIX domain sockets (only servers)
+Proto RefCnt Flags       Type       State         I-Node   PID/Program name     Path
+unix  2      [ ACC ]     SEQPACKET  LISTENING     12375    1/init               /run/udev/control
+unix  2      [ ACC ]     STREAM     LISTENING     12238    1/init               /run/systemd/private
+unix  2      [ ACC ]     STREAM     LISTENING     12244    1/init               /run/lvm/lvmpolld.socket
+unix  2      [ ACC ]     STREAM     LISTENING     12246    1/init               /run/systemd/journal/stdout
+unix  2      [ ACC ]     STREAM     LISTENING     12290    1/init               /run/lvm/lvmetad.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16363    1/init               /var/lib/lxd/unix.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16399    1/init               /run/acpid.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16405    1/init               @ISCSIADM_ABSTRACT_NAMESPACE
+unix  2      [ ACC ]     STREAM     LISTENING     16406    1/init               /run/snapd.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16408    1/init               /run/snapd-snap.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16431    1/init               /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     16435    1/init               /run/uuidd/request
+student-04-8bb7b802a195@ws01:~$ ^C
+student-04-8bb7b802a195@ws01:~$ ps -ax | grep python3
+  918 ?        Ssl    0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+ 1019 ?        Ssl    0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+ 1115 ?        Ss     0:00 /usr/bin/python3 /usr/bin/google_network_daemon
+ 1118 ?        Ss     0:00 /usr/bin/python3 /usr/bin/google_clock_skew_daemon
+ 1121 ?        Ss     0:00 /usr/bin/python3 /usr/bin/google_accounts_daemon
+ 2295 ?        Ss     0:00 python3 /usr/local/bin/jimmytest.py
+ 4560 pts/0    S+     0:00 grep --color=auto python3
+student-04-8bb7b802a195@ws01:~$ ^C
+student-04-8bb7b802a195@ws01:~$ cat /usr/local/bin/jimmytest.py
+#!/usr/bin/env python3
+'''    Testing program for socket
+      Author: Jimmy
+'''
+import http.server
+import socketserver
+import http
+
+port = 80
+class Handler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(http.HTTPStatus.INTERNAL_SERVER_ERROR)
+        self.end_headers()
+
+        mystring = "500 Internal Server Error!\n"
+        self.data = bytes(mystring, 'utf-8')
+        self.wfile.write(self.data)
+
+with socketserver.TCPServer(("", port), Handler) as httpd:
+    httpd.serve_forever()
+
+student-04-8bb7b802a195@ws01:~$ sudo kill 2295
+student-04-8bb7b802a195@ws01:~$ ps -ax | grep python3
+  918 ?        Ssl    0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+ 1019 ?        Ssl    0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+ 1115 ?        Ss     0:00 /usr/bin/python3 /usr/bin/google_network_daemon
+ 1118 ?        Ss     0:00 /usr/bin/python3 /usr/bin/google_clock_skew_daemon
+ 1121 ?        Ss     0:00 /usr/bin/python3 /usr/bin/google_accounts_daemon
+ 4967 ?        Ss     0:00 python3 /usr/local/bin/jimmytest.py
+ 4982 pts/0    S+     0:00 grep --color=auto python3
+student-04-8bb7b802a195@ws01:~$ sudo systemctl --type=service | grep jimmy
+  jimmytest.service                    loaded active running Jimmy python test service       
+student-04-8bb7b802a195@ws01:~$ sudo systemctl stop jimmytest && sudo systemctl disable jimmytest
+Removed /etc/systemd/system/default.target.wants/jimmytest.service.
+student-04-8bb7b802a195@ws01:~$ sudo netstat -nlp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      712/systemd-resolve
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1318/sshd    
+tcp6       0      0 :::22                   :::*                    LISTEN      1318/sshd    
+udp        0      0 127.0.0.53:53           0.0.0.0:*                           712/systemd-resolve
+udp        0      0 10.128.0.2:68           0.0.0.0:*                           696/systemd-network
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           1983/chronyd 
+udp6       0      0 ::1:323                 :::*                                1983/chronyd 
+raw6       0      0 :::58                   :::*                    7           696/systemd-network
+Active UNIX domain sockets (only servers)
+Proto RefCnt Flags       Type       State         I-Node   PID/Program name     Path
+unix  2      [ ACC ]     SEQPACKET  LISTENING     12375    1/init               /run/udev/control
+unix  2      [ ACC ]     STREAM     LISTENING     12238    1/init               /run/systemd/private
+unix  2      [ ACC ]     STREAM     LISTENING     12244    1/init               /run/lvm/lvmpolld.socket
+unix  2      [ ACC ]     STREAM     LISTENING     12246    1/init               /run/systemd/journal/stdout
+unix  2      [ ACC ]     STREAM     LISTENING     12290    1/init               /run/lvm/lvmetad.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16363    1/init               /var/lib/lxd/unix.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16399    1/init               /run/acpid.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16405    1/init               @ISCSIADM_ABSTRACT_NAMESPACE
+unix  2      [ ACC ]     STREAM     LISTENING     16406    1/init               /run/snapd.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16408    1/init               /run/snapd-snap.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16431    1/init               /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     16435    1/init               /run/uuidd/request
+student-04-8bb7b802a195@ws01:~$ sudo systemctl start apache2
+student-04-8bb7b802a195@ws01:~$
