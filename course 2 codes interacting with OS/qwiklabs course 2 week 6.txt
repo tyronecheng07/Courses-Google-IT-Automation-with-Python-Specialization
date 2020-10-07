@@ -1,0 +1,108 @@
+
+student-00-992626ca600b@linux-instance:~$ cd data
+student-00-992626ca600b@linux-instance:~/data$ cat list.txt
+
+001 jane /data/jane_profile_07272018.doc
+002 kwood /data/kwood_profile_04022017.doc
+003 pchow /data/pchow_profile_05152019.doc
+004 janez /data/janez_profile_11042019.doc
+005 jane /data/jane_pic_07282018.jpg
+006 kwood /data/kwood_pic_04032017.jpg
+007 pchow /data/pchow_pic_05162019.jpg
+008 jane /data/jane_contact_07292018.csv
+009 kwood /data/kwood_contact_04042017.csv
+010 pchow /data/pchow_contact_05172019.csv
+
+student-00-992626ca600b@linux-instance:~/data$ ls
+jane_contact_07292018.csv   kwood_pic_04032017.jpg      pchow_pic_05162019.jpg
+jane_profile_07272018.doc   kwood_profile_04022017.doc
+janez_profile_11042019.doc  list.txt
+student-00-992626ca600b@linux-instance:~/data$ grep 'jane' ../data/list.txt
+001 jane /data/jane_profile_07272018.doc
+004 janez /data/janez_profile_11042019.doc
+005 jane /data/jane_pic_07282018.jpg
+008 jane /data/jane_contact_07292018.csv
+student-00-992626ca600b@linux-instance:~/data$ grep ' jane ' ../data/list.txt
+001 jane /data/jane_profile_07272018.doc
+005 jane /data/jane_pic_07282018.jpg
+008 jane /data/jane_contact_07292018.csv
+student-00-992626ca600b@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f1
+001
+005
+008
+student-00-992626ca600b@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f2
+jane
+jane
+jane
+student-00-992626ca600b@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f3
+/data/jane_profile_07272018.doc
+/data/jane_pic_07282018.jpg
+/data/jane_contact_07292018.csv
+student-00-992626ca600b@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f1-3
+001 jane /data/jane_profile_07272018.doc
+005 jane /data/jane_pic_07282018.jpg
+008 jane /data/jane_contact_07292018.csv
+student-00-992626ca600b@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f1,3
+001 /data/jane_profile_07272018.doc
+005 /data/jane_pic_07282018.jpg
+008 /data/jane_contact_07292018.csv
+student-00-992626ca600b@linux-instance:~/data$ test EXPRESSION
+
+student-00-992626ca600b@linux-instance:~/data$ if test -e ~/data/jane_profile_07272018.doc; then echo "File exists"; else echo "File doesn't exist"; fi
+File exists
+student-00-992626ca600b@linux-instance:~/data$ > test.txt
+student-00-992626ca600b@linux-instance:~/data$ ls
+jane_contact_07292018.csv   kwood_pic_04032017.jpg      pchow_pic_05162019.jpg
+jane_profile_07272018.doc   kwood_profile_04022017.doc  test.txt
+janez_profile_11042019.doc  list.txt
+student-00-992626ca600b@linux-instance:~/data$ echo "I am appending text to this test file" >> test.txt
+student-00-992626ca600b@linux-instance:~/data$ cat test.txt
+I am appending text to this test file
+student-00-992626ca600b@linux-instance:~/data$ for i in 1 2 3 ; do echo $i; done
+1
+2
+3
+student-00-992626ca600b@linux-instance:~/data$ cd ~/scripts
+student-00-992626ca600b@linux-instance:~/scripts$ nano findJane.sh
+student-00-992626ca600b@linux-instance:~/scripts$ nano findJane.sh
+student-00-992626ca600b@linux-instance:~/scripts$ > oldFiles.txt
+student-00-992626ca600b@linux-instance:~/scripts$ nano findJane.sh
+student-00-992626ca600b@linux-instance:~/scripts$ chmod +x findJane.sh
+student-00-992626ca600b@linux-instance:~/scripts$ ./findJane.sh
+student-00-992626ca600b@linux-instance:~/scripts$ cat oldFiles.txt
+/home/student-00-992626ca600b/data/jane_profile_07272018.doc
+/home/student-00-992626ca600b/data/jane_contact_07292018.csv
+student-00-992626ca600b@linux-instance:~/scripts$ nano changeJane.py
+student-00-992626ca600b@linux-instance:~/scripts$ chmod +x changeJane.py
+student-00-992626ca600b@linux-instance:~/scripts$ ./changeJane.py oldFiles.txt
+student-00-992626ca600b@linux-instance:~/scripts$ cd ~/data
+student-00-992626ca600b@linux-instance:~/data$ ls
+janez_profile_11042019.doc  kwood_pic_04032017.jpg      pchow_pic_05162019.jpg
+jdoe_contact_07292018.csv   kwood_profile_04022017.doc  test.txt
+jdoe_profile_07272018.doc   list.txt
+
+
+#example bash
+
+#!/bin/bash
+> oldFiles.txt
+files=$(grep " jane " ../data/list.txt | cut -d' ' -f3)
+for f in $files; do	
+  if [ -e $HOME$f ]; then
+    echo $HOME$f >> oldFiles.txt;
+  fi
+done
+
+#example python
+
+#!/usr/bin/env python3
+import sys
+import subprocess
+
+logfile = sys.argv[1]
+with open(logfile, "r") as file:
+for line in file.readlines():
+  old_name = line.strip()
+  new_name = old_name.replace("jane", "jdoe")
+  subprocess.run(["mv", old_name, new_name])
+
