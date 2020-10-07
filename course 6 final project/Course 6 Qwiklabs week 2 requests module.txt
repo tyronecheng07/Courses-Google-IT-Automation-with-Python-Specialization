@@ -1,0 +1,42 @@
+###### use requests module to access web service ######
+
+cd /data/feedback
+ls
+cat 007.txt
+
+### create a new py file ######
+
+cd ~
+nano run.py
+
+
+##### run.py ########
+#! /usr/bin/env python3
+
+import os
+import requests
+import json
+
+url = 'http://35.222.77.188/feedback/'
+
+#### List all .txt files under the directory (create a list) ######
+path = '/data/feedback/'
+dir_list = os.listdir(path)
+
+for file in dir_list:
+  with open(path+file) as new_file:
+    i = 0
+    my_dict = {}
+    field = ['title', 'name', 'date', 'feedback']
+    for line in new_file:
+      my_dict[field[i]] = line.rstrip('\n')
+      i += 1  
+    # upload the date using requests module #         
+    response = requests.post(url, json=my_dict)
+    print('status code: ' + str(response.status_code))
+
+
+#######
+
+chmod +x ~/run.py
+./run.py

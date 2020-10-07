@@ -1,0 +1,372 @@
+#### Automate updating catalog information ######
+
+## 1 fetching supplier data ###
+
+ls ~/
+sudo chmod +x ~/download_drive_file.sh
+./download_drive_file.sh 1LePo57dJcgzoK4uiI_48S01Etck7w_5f supplier-data.tar.gz
+
+# extract the file which create  subfolders description and images
+tar xf ~/supplier-data.tar.gz
+
+ls ~/supplier-data
+cat ~/supplier-data/descriptions/007.txt
+
+#### working with supplier images #######
+
+nano ~/changeImage.py
+
+#####
+
+#!/usr/bin/env python3
+
+import os
+from PIL import Image
+
+# To get the username from environment variable
+USER = os.getenv('USER')
+# Creating image directory path
+image_directory = '/home/{}/supplier-data/images/'.format(USER)
+# listing all the files in the above directory.
+files = os.listdir(image_directory)
+
+size = 600, 400
+# Parsing through list of files.
+for file_name in files:
+  # Accepting files that has tiff extension and ignoring hidden files
+  if not file_name.startswith('.') and 'tiff' in file_name:
+    image_path = image_directory + image_name
+    # removing the .tiff extension
+    path = os.path.splitext(image_path)[0]
+    # Adding jpeg format to the image
+    new_path = '{}.jpeg'.format(path)
+    im = Image.open(image_path).convert('RGB')
+    im.resize(size).save(new_path, 'JPEG')
+
+######
+
+sudo chmod +x ~/changeImage.py
+./changeImage.py
+file ~/supplier-data/images/003.jpeg
+
+##### 2 uploading images to web server #######
+
+cat ~/example_upload.py
+sudo chmod +x ~/example_upload.py
+./example_upload.py
+
+nano ~/supplier_image_upload.py
+
+###
+
+#!/usr/bin/env python3
+
+import requests
+import os
+
+url = "http://localhost/upload/"
+# To get the username from environment variable
+USER = os.getenv('USER')
+# Creating image directory path
+image_directory = '/home/{}/supplier-data/images/'.format(USER)
+# listing all the files in the above directory.
+image_list = os.listdir(image_directory)
+
+for file_name in image_list:
+  # Accepting files that has jpeg extension and ignoring hidden files
+  if not file_name.startswith('.') and 'jpeg' in file_name:
+    image_path = image_directory + file_name
+    with open(image_path, 'rb') as opened:
+      r = requests.post(url, files={'file': opened})
+
+###
+
+sudo chmod +x ~/supplier_image_upload.py
+./supplier_image_upload.py
+
+##### 3 Uploading the descriptions ##########
+
+nano ~/run.py
+
+###
+
+#! /usr/bin/env python3
+
+import os
+import requests
+import json
+import locale
+import datetime
+# Importing modules from custom python files
+from reports import generate_report as report
+from report_email import generate as email_generate
+from report_email import send as email_send
+
+def catalog_data():
+  """This function will return a list of dictionaries with all the details like name, weight, description, image_name. It will change the weight to integer format."""
+  catalog = []
+  USER = os.getenv('USER')
+  # URL to push the data to the website
+  url = "http://localhost/fruits/"
+   # Creating description directory path
+  description_directory = '/home/{}/supplier-data/descriptions/'.format(USER)
+  # listing all the files in the above directory.
+  description_list = os.listdir(description_directory)
+  # Going through each filename in the directory
+  for description_name in description_list:
+      # Accepting files that has txt extension and ignoring hidden files
+      if not description_name.startswith('.') and 'txt' in description_name:
+          # creating absolute path for each image
+          description_path = description_directory + description_name
+          # creating image name from text files and changing the extension to jpeg
+          image_path = description_name.strip('.txt') + '.jpeg'
+          # Opening each file
+          with open(description_path) as content:
+              # parsing content and storing it in a list
+              data = content.readlines()
+              # extracting the first line and removing the newline
+              name = data[0].strip('\n')
+              # extracting the second line and removing the newline and lbs. Also changing it to integer
+              weight = int(data[1].strip('\n').strip(' lbs'))
+              # extracting the third line and removing the newline
+              description = data[2].strip('\n')
+              # creating a dictionary object with required format
+              catalog_object = {"name": "{}".format(name), "weight": weight,
+                                  "description": "{}".format(description.replace(u'\xa0', u'')),
+                                  "image_name": "{}".format(image_path)}
+              # converting dictionary to json
+              dict_to_json = json.dumps(catalog_object)
+              # Creating headers to push the data to fruits url
+              header = {'Content-Type': 'application/json'}
+              # pushing data to fruits url
+              response = requests.post(url, headers=header, data=dict_to_json)
+              # If the error code is not 2xx, raise exception
+              print(response.reason)
+              # creating a list from the above dictionary
+              catalog.append(catalog_object)
+              # removing all the none values from the list of dictionaries
+              catalog = list(filter(None, catalog))
+  return catalog
+
+def summary(file_input):
+    """Generating a summary with two lists, which gives the output name and weight"""
+    # List of all the names of fruits in catalog list of dictionaries
+    name_lst = ['name: ' + dct['name'] for dct in catalog_data()]
+    # List of all the weight of fruits in catalog list of dictionaries
+    weight_lst = ['weight: ' + str(dct['weight']) + ' lbs' for dct in catalog_data()]
+    # initializing the object
+    summary_result = ""
+    # Calling values from two lists one by one.
+    for name, weight in zip(name_lst, weight_lst):
+        if file_input == 'pdf':
+            summary_result += name + '<br />' + weight + '<br />' + '<br />'
+    return summary_result
+
+def main():
+  # To get the username from environment variable
+  USER = os.getenv('USER')
+  # To set encoding to avoid ascii errors
+  locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
+
+  # Creating image directory path
+  image_directory = '/home/{}/supplier-data/images/'.format(USER)
+  
+  # Creating description directory path
+  description_directory = '/home/{}/supplier-data/descriptions/'.format(USER)
+  # listing all the files in the above directory.
+  description_list = os.listdir(description_directory)
+  
+  # URL to push the data to the website
+  url = "http://localhost/fruits/"
+  # Creating data in format "May 5, 2020"
+  current_date = datetime.date.today().strftime("%B %d, %Y")
+  # Title for the PDF file with the created date
+  title = 'Processed Update on ' + str(current_date)
+  # send the PDF report as an email attachment
+  sender = "automation@example.com"
+  receiver = "{}@example.com".format(USER)
+  subject = 'Upload Completed - Online Fruit Store'
+  body = 'All fruits are uploaded to our website successfully. A detailed list is attached to this email.'
+
+  # calling the report function from custom module
+  report('/tmp/processed.pdf', title, summary('pdf'))
+  message = email_generate(sender, receiver, subject, body, "/tmp/processed.pdf")
+  email_send(message)
+
+if __name__ == "__main__":
+  main()
+
+
+###
+
+sudo chmod +x ~/run.py
+./run.py
+
+########## 4 Generate a PDF report and send it through email ##########
+
+nano ~/reports.py
+
+#### generate pdf report #####
+###
+
+#!/usr/bin/env python3
+
+from reportlab.platypus import SimpleDocTemplate
+from reportlab.platypus import Paragraph, Spacer, Table, Image
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
+
+def generate_report(filename, title, additional_info):
+  styles = getSampleStyleSheet()
+  report = SimpleDocTemplate(filename)
+  report_title = Paragraph(title, styles["h1"])
+  report_info = Paragraph(additional_info, styles["BodyText"])
+  
+  empty_line = Spacer(1,20)
+  report.build([report_title, empty_line, report_info, empty_line])
+
+###
+
+#### report email ####
+
+nano ~/report_email.py
+
+###
+
+#!/usr/bin/env python3
+
+import email.message
+import mimetypes
+import os.path
+import smtplib
+
+def generate(sender, recipient, subject, body, attachment_path):
+  """Creates an email with an attachement."""
+  # Basic Email formatting
+  message = email.message.EmailMessage()
+  message["From"] = sender
+  message["To"] = recipient
+  message["Subject"] = subject
+  message.set_content(body)
+
+  # Process the attachment and add it to the email
+  # this condition will occur when attachment path is not an empty string
+  if not attachment_path == "":
+    attachment_filename = os.path.basename(attachment_path)
+    mime_type, _ = mimetypes.guess_type(attachment_path)
+    mime_type, mime_subtype = mime_type.split('/', 1)
+
+    with open(attachment_path, 'rb') as ap:
+      message.add_attachment(ap.read(),
+                          maintype=mime_type,
+                          subtype=mime_subtype,
+                          filename=attachment_filename)
+
+  return message
+
+def send(message):
+  """Sends the message to the configured SMTP server."""
+  mail_server = smtplib.SMTP('localhost')
+  mail_server.send_message(message)
+  mail_server.quit()
+
+###
+
+####### health check ######
+
+nano ~/health_check.py
+
+###
+
+#!/usr/bin/env python3
+
+import psutil
+import shutil
+import socket
+import os
+from report_email import generate as email_generate
+from report_email import send as email_send
+
+# if the functions' condition below returns True, means we have no errors.
+def check_cpu_usage(cpu):
+  """This function will check if CPU usage is over 80%"""
+  top = psutil.cpu_percent(cpu)
+  return top < 80
+
+def check_disk_usage(disk):
+  """Verifies that there's enough free space on disk, it should be more than 20 for good condition"""
+  du = shutil.disk_usage(disk)
+  free = du.free / du.total * 100
+  return free > 20
+
+def check_memory_usage():
+  """This function will check if Available memory is less than 500MB"""
+  # using the psutil command and converting it to dictionary and getting the available memory
+  memory = dict(psutil.virtual_memory()._asdict())['available']
+  # converting available memory to mb
+  available_memory = (memory / 1024) / 1024
+  return available_memory > 500
+
+def resolve_hostname():
+  """This function will check if localhost cannot be resolved to 127.0.0.1"""
+  hostname = socket.gethostbyname('localhost')
+  return hostname == '127.0.0.1'
+
+
+# report the error if the functions above return False => will trigger the functions below with not False = True, then trigger error message
+def check_error():
+  """This function will return subject according to the conditions met"""
+  if not check_cpu_usage(1):
+    subject = 'Error - CPU usage is over 80%'
+    return subject
+  elif not check_disk_usage('/'):
+    subject = 'Error - Available disk space is less than 20%'
+    return subject
+  elif not check_memory_usage():
+    subject = 'Error - Available memory is less than 500MB'
+    return subject
+  elif not resolve_hostname():
+    subject = 'Error - localhost cannot be resolved to 127.0.0.1'
+    return subject
+  else: 
+    return None
+
+if __name__ == "__main__":
+  # To get the username from environment variable
+  USER = os.getenv('USER')
+  error_subject = check_error()
+  #if the error exists
+  if error_subject is not None:
+    #overwrite the body and subject of the email to notify the user of the error appeared
+    sender = "automation@example.com"
+    receiver = "{}@example.com".format(USER)
+    body = 'Please check your system and resolve the issue as soon as possible.'
+    subject = error_subject
+    message = email_generate(sender, receiver, subject, body, "")
+    email_send(message)
+    
+###
+
+sudo chmod +x ~/health_check.py
+./health_check.py
+
+### to test the script ###
+
+sudo apt install stress
+
+# Allow the stress test to run, as it will maximize our CPU utilization.
+stress --cpu 8
+./health_check.py
+close the stress --cpu command with ctrl c
+
+### start a cronjon (automate the monitoring file (health_check.py) ###
+
+Now, you will be setting a cron job that executes the script health_check.py every 60 seconds and sends health status to the respective user.
+
+To set a user cron job use the following command:
+
+crontab -e
+
+creating cronjob with * == any, (min hour day month day of month) command
+for example: command == ./home/user/health_check.py
+   
